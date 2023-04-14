@@ -61,12 +61,21 @@ MariaDB [dbtoko1]> SELECT id, kode, nama,
     -> ELSE 'Tidak Ada'
     -> END AS 'BONUS'
     -> FROM produk;
-    
+
 -- Soal 3.4
 -- 1.	Tampilkan data statistik jumlah tempat lahir pelanggan
+MariaDB [dbtoko1]> SELECT tmp_lahir,
+    -> COUNT(*) AS jumlah FROM pelanggan GROUP BY tmp_lahir;
 -- 2.	Tampilkan jumlah statistik produk berdasarkan jenis produk
+MariaDB [dbtoko1]> SELECT jenis_produk_id,
+    -> COUNT(*) AS jumlah_jenis_produk FROM produk GROUP BY jenis_produk_id;
 -- 3.	Tampilkan data pelanggan yang usianya dibawah rata usia pelanggan
+MariaDB [dbtoko1]> SELECT * FROM pelanggan WHERE YEAR(NOW()) - YEAR(tgl_lahir) < (SELECT AVG(YEAR(NOW()) - YEAR(tgl_lahir)) FROM pelanggan);
 -- 4.	Tampilkan data produk yang harganya diatas rata-rata harga produk
+MariaDB [dbtoko1]> SELECT * FROM produk WHERE harga_jual > (SELECT AVG(harga_jual) FROM produk);
 -- 5.	Tampilkan data pelanggan yang memiliki kartu dimana iuran tahunan kartu diatas 90rb
+MariaDB [dbtoko1]>
 -- 6.	Tampilkan statistik data produk dimana harga produknya dibawah rata-rata harga produk secara keseluruhan
+MariaDB [dbtoko1]> SELECT * FROM produk WHERE harga_jual < (SELECT AVG(harga_jual) FROM produk);
 -- 7.	Tampilkan data pelanggan yang memiliki kartu dimana diskon kartu yang diberikan diatas 3%
+MariaDB [dbtoko1]> SELECT * FROM pelanggan WHERE kartu_id IN (SELECT id FROM kartu WHERE diskon > 0.03);
