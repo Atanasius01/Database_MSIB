@@ -39,10 +39,29 @@ MariaDB [dbtoko1]> SELECT SUM(stok*harga_jual) AS total_asset FROM produk; --Ber
 
 -- Soal 3.3
 -- 1.	Tampilkan data produk : id, nama, stok dan informasi jika stok telah sampai batas minimal atau kurang dari minimum stok dengan informasi ‘segera belanja’ jika tidak ‘stok aman’.
+MariaDB [dbtoko1]> SELECT id, nama, stok,
+    -> CASE
+    -> WHEN stok <= min_stok THEN 'Segera Belanja'
+    -> ELSE 'Stok Aman'
+    -> END AS 'informasi_status'
+    -> FROM produk;
 -- 2.	Tampilkan data pelanggan: id, nama, umur dan kategori umur : jika umur < 17 → ‘muda’ , 17-55 → ‘Dewasa’, selainnya ‘Tua’
+MariaDB [dbtoko1]> SELECT id, nama_pelanggan, YEAR(NOW()) - YEAR(tgl_lahir) AS umur,
+    -> CASE
+    -> WHEN YEAR(NOW()) - YEAR(tgl_lahir) < 17 THEN 'Muda'
+    -> WHEN YEAR(NOW()) - YEAR(tgl_lahir) BETWEEN 17 AND 55 THEN 'Dewasa'
+    -> ELSE 'Tua'
+    -> END AS 'Kategori_Umur'
+    -> FROM pelanggan;
 -- 3.	Tampilkan data produk: id, kode, nama, dan bonus untuk kode ‘TV01’ →’DVD Player’ , ‘K001’ → ‘Rice Cooker’ selain dari diatas ‘Tidak Ada’
-
-
+MariaDB [dbtoko1]> SELECT id, kode, nama,
+    -> CASE
+    -> WHEN kode = 'TV01' THEN 'DVD Player'
+    -> WHEN kode = 'K001' THEN 'Rice Cooker'
+    -> ELSE 'Tidak Ada'
+    -> END AS 'BONUS'
+    -> FROM produk;
+    
 -- Soal 3.4
 -- 1.	Tampilkan data statistik jumlah tempat lahir pelanggan
 -- 2.	Tampilkan jumlah statistik produk berdasarkan jenis produk
