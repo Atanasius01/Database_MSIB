@@ -74,8 +74,8 @@ MariaDB [dbtoko1]> SELECT * FROM pelanggan WHERE YEAR(NOW()) - YEAR(tgl_lahir) <
 -- 4.	Tampilkan data produk yang harganya diatas rata-rata harga produk
 MariaDB [dbtoko1]> SELECT * FROM produk WHERE harga_jual > (SELECT AVG(harga_jual) FROM produk);
 -- 5.	Tampilkan data pelanggan yang memiliki kartu dimana iuran tahunan kartu diatas 90rb
-MariaDB [dbtoko1]>
+MariaDB [dbtoko1]> SELECT * FROM pelanggan WHERE kartu_id;
 -- 6.	Tampilkan statistik data produk dimana harga produknya dibawah rata-rata harga produk secara keseluruhan
 MariaDB [dbtoko1]> SELECT * FROM produk WHERE harga_jual < (SELECT AVG(harga_jual) FROM produk);
 -- 7.	Tampilkan data pelanggan yang memiliki kartu dimana diskon kartu yang diberikan diatas 3%
-MariaDB [dbtoko1]> SELECT * FROM pelanggan WHERE kartu_id IN (SELECT id FROM kartu WHERE diskon > 0.03);
+MariaDB [dbtoko1]> SELECT * FROM pelanggan WHERE kartu_id IN (diskon FROM kartu);
