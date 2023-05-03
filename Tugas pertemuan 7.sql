@@ -103,9 +103,8 @@ CREATE PROCEDURE AllPesanan()
 DELIMITER ;
 CALL AllPesanan();
 
--- pesanan_produk_vw (menggunakan join dari table pesanan,pelanggan dan produk)
+-- pesanan_produk_vw (menggunakan join dari table pesanan, pelanggan dan produk)
 DELIMITER $$
-BEGIN
-END$$
-DELIMITER;
-CALL
+CREATE VIEW pesanan_produk_vw AS
+SELECT pelanggan.nama_pelanggan, pesanan.tanggal, pesanan.total, produk.nama FROM pelanggan INNER JOIN pesanan ON pelanggan.id = pesanan.pelanggan_id INNER JOIN produk ON pesanan.pelanggan_id = produk.id;
+SELECT * FROM pesanan_produk_vw;
