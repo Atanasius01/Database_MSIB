@@ -130,3 +130,9 @@ CREATE VIEW pesanan_produk_vw AS
     -> JOIN pesanan ON pelanggan.id = pesanan.pelanggan_id
     -> JOIN produk ON pesanan.pelanggan_id = produk.id;
 SELECT * FROM pesanan_produk_vw;
++------------+------------+------+--------+----------------+------------------------+
+| tanggal    | nama       | kode | total  | nama_pelanggan | email                  |
++------------+------------+------+--------+----------------+------------------------+
+| 2023-03-03 | TV         | TV01 | 200000 | Atanasius      | atanasius256@gmail.com |
+| 2022-02-02 | TV 21 Inch | TV02 |  30000 | Lili           | lili@gmail.com         |
++------------+------------+------+--------+----------------+------------------------+
