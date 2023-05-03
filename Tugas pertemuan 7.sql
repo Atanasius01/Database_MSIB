@@ -93,6 +93,11 @@ CREATE PROCEDURE totalPesanan()
     ->END$$
 DELIMITER ;
 CALL totalPesanan();
++------------+
+| SUM(total) |
++------------+
+|     230000 |
++------------+
 
 -- Tampilkan seluruh pesanan
 DELIMITER $$
@@ -102,9 +107,24 @@ CREATE PROCEDURE AllPesanan()
     -> END$$
 DELIMITER ;
 CALL AllPesanan();
++----+------------+--------+--------------+
+| id | tanggal    | total  | pelanggan_id |
++----+------------+--------+--------------+
+|  1 | 2023-03-03 | 200000 |            1 |
+|  2 | 2022-02-02 |  30000 |            1 |
++----+------------+--------+--------------+
+
+CREATE VIEW AllPesananPelanggan AS
+SELECT pesanan.tanggal, pesanan.total, pelanggan.nama_pelanggan, pelanggan.email FROM pelanggan 
+JOIN pesanan ON pelanggan.id = pesanan.pelanggan_id;
++------------+--------+----------------+------------------------+
+| tanggal    | total  | nama_pelanggan | email                  |
++------------+--------+----------------+------------------------+
+| 2023-03-03 | 200000 | Atanasius      | atanasius256@gmail.com |
+| 2022-02-02 |  30000 | Lili           | lili@gmail.com         |
++------------+--------+----------------+------------------------+
 
 -- pesanan_produk_vw (menggunakan join dari table pesanan, pelanggan dan produk)
-DELIMITER $$
 CREATE VIEW pesanan_produk_vw AS
     -> SELECT pesanan.tanggal, produk.nama, produk.kode, pesanan.total, pelanggan.nama_pelanggan, pelanggan.email FROM pelanggan
     -> JOIN pesanan ON pelanggan.id = pesanan.pelanggan_id
