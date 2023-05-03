@@ -1,4 +1,4 @@
-//Fungsi inputPelanggan
+-- Fungsi inputPelanggan
 DELIMITER $$
 CREATE PROCEDURE inputPelanggan(kode varchar(10), nama_pelanggan varchar(50), jk char(1), tmp_lahir varchar(20), tgl_lahir date, email varchar(30), kartu_id int(11), alamat varchar(40))
     -> BEGIN
@@ -24,7 +24,7 @@ SELECT * FROM pelanggan;
 | 11 | 10011 | Chika          | P    | Jakarta   | 2002-02-01 | chika@gmail.com        |        2 | Jakarta  |
 +----+-------+----------------+------+-----------+------------+------------------------+----------+----------+
 
-//Fungsi showPelanggan
+-- Fungsi showPelanggan
 DELIMITER $$
 CREATE PROCEDURE showPelanggan()
     -> BEGIN
@@ -48,7 +48,7 @@ CALL showPelanggan();
 | 10011 | Chika          | chika@gmail.com        | Jakarta  |
 +-------+----------------+------------------------+----------+
 
-//Fungsi inputProduk
+--Fungsi inputProduk
 DELIMITER $$
 CREATE PROCEDURE inputProduk(kode varchar(10), nama varchar(45), harga_beli double, harga_jual double, stok int(11), min_stok int(11), jenis_produk_id int(11))
     -> BEGIN
@@ -70,7 +70,7 @@ SELECT * FROM produk;
 |  7 | TB0001 | Teh Botol  |       3500 |       5000 |   15 |       10 |               3 |
 +----+--------+------------+------------+------------+------+----------+-----------------+
 
-//Fungsi showProduk
+-- Fungsi showProduk
 DELIMITER $$
 CALL showProduks();
 +--------+------------+------------+------+
@@ -85,9 +85,27 @@ CALL showProduks();
 | TB0001 | Teh Botol  |       5000 |   15 |
 +--------+------------+------------+------+
 
-//Fungsi totalPesanan
+-- Fungsi totalPesanan
+DELIMITER $$
+CREATE PROCEDURE totalPesanan()
+    ->BEGIN
+    ->SELECT SUM(total) FROM pesanan;
+    ->END$$
+DELIMITER ;
+CALL totalPesanan();
 
+-- Tampilkan seluruh pesanan
+DELIMITER $$
+CREATE PROCEDURE AllPesanan()
+    -> BEGIN
+    -> SELECT * FROM pesanan;
+    -> END$$
+DELIMITER ;
+CALL AllPesanan();
 
-//tampilkan seluruh pesanan
-
-// pesanan_produk_vw (menggunakan join dari table pesanan,pelanggan dan produk)
+-- pesanan_produk_vw (menggunakan join dari table pesanan,pelanggan dan produk)
+DELIMITER $$
+BEGIN
+END$$
+DELIMITER;
+CALL
