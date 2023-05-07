@@ -13,7 +13,7 @@ INSERT INTO pesanan SET
 id = new.id, no_kuitansi= new.no_kuitansi, tanggal= new.tanggal, ke = new.ke, pesanan_id = new.pesanan_id;
 END
 
-CREATE TRIGGER pembayaran_after_update
+CREATE TRIGGER status_pembayaran_pesanan
 AFTER UPDATE ON pembayaran
 FOR EACH ROW
 BEGIN
